@@ -54,16 +54,71 @@
         <div class="row row-cols-1 row-cols-lg-2">
             <div class="col-lg-8">
                 <pre class="line-numbers"><code class="language-javascript">
-                    //call hello
-                    function helloWorld(){
-                        alert("hello world!");
+                    function getValues(){
+                        let startingValue = String(document.getElementById("startValue").value);
+                        
+                        //transform the string so that it's more manageable
+                        let transformedValue = valueTransform(startingValue);
+                    
+                        //reverse the string to compare it to the starting-transformed value
+                        let reverseValue = reverseString(transformedValue);
+                    
+                        //compare the string
+                        let templateReturn = stringComparison(transformedValue, reverseValue);
+                    
+                        //finally, produce a conclusion based on the comparison.
+                        if(templateReturn==true){
+                            document.getElementById("results").innerHTML = 
+                            `<h5 class="lead">Congratulations! ${startingValue} is certainly a palindrome!</h5>`;
+                            }
+                        else if(templateReturn==false){
+                            document.getElementById("results").innerHTML = 
+                            `<h5 class="lead">Unfortunately, "${startingValue}" is not a palindrome.</h5>`;
+                        }
+                    
+                    }
+                    
+                    function reverseString(transformedValue){
+                        let reverseValue = "";
+                        for (i = transformedValue.length - 1; i >= 0; i--){
+                            reverseValue+=transformedValue[i];
+                        }
+                        return(reverseValue);
+                    }
+                    
+                    function valueTransform(startingValue){
+                        transformedValue="";
+                        transformedValue = startingValue.split(" ").join("")
+                        transformedValue = transformedValue.toLowerCase();
+                        return(transformedValue);
+                    }
+                    
+                    function stringComparison(transformedValue, reverseValue){
+                        let templateReturn=false;
+                        if(transformedValue == reverseValue){
+                            templateReturn=true;
+                        }
+                        return(templateReturn);
                     }
                 </code></pre>
             </div>
             <div class="col-lg-4">
                 <p></p>
-                <h5>Hello World</h5>
-                <p>Hello world is a function that displays an alert with a message of "Hello World".</p>
+                <h5 class="mt-4">function getValues</h5>
+                <p>function getValues acts as the landing zone for the script to begin.
+                    I then broke each transform into a separate function, to better keep track of everything.
+                </p>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <h5>function reverseString</h5>
+                <p>I wanted to break the for loop into it's own function, that way I could have more control of it. reverseString accepts a value, and then "reverses" the order of its indices. </p>
+                <br><br>
+                <h5>function valueTransform</h5>
+                <p>After I wrote the reverseString function, I added this function to eliminate case sensitivity as well as spaces that could effect the comparison.</p>
+                <br><br>
+                <h5>function stringComparison </h5>
+                <p>Before I send back the new HTML to display on the page, I wanted to create a function to compare the two values. However other than readability there isn't any reason this function needed to be created.</p>
+
+                <br><br>
             </div>
         </div>    
     </div>
